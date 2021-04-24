@@ -42,6 +42,26 @@ class UsuarioTest : DescribeSpec({
           fotoEnCuzco.agregarLikeDe(Pepe)
           unVideo.agregarLikeDe(Ramon)
         }
+        it("cantidad de Likes"){
+          val Pepe = Usuario()
+          val Ramon = Usuario()
+
+          saludoCumpleanios.agregarLikeDe(Pepe)
+          saludoCumpleanios.agregarLikeDe(Ramon)
+          saludoCumpleanios.cantidadDeLikes().shouldBe(2)
+
+          fotoEnCuzco.agregarLikeDe(Pepe)
+          fotoEnCuzco.cantidadDeLikes().shouldBe(1)
+
+          unVideo.agregarLikeDe(Ramon)
+          unVideo.cantidadDeLikes().shouldBe(1)
+        }
+
+        //it("personas que dieron Like a una publicacion") {
+          //saludoCumpleanios.mostrarLikes().shuldBe()
+          //fotoEnCuzco.mostrarLikes().shouldBe()
+          //unVideo.MostrarLikes().shouldBe()
+        //}
       }
     }
 

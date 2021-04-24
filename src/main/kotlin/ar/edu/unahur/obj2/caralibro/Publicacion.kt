@@ -14,6 +14,10 @@ abstract class Publicacion {
       error("Este usuario ya dio Like")
     }
   }
+
+  fun cantidadDeLikes(): Int {
+    return listaLikes.size
+  }
 }
 
 class Foto(val alto: Int, val ancho: Int) : Publicacion() {
