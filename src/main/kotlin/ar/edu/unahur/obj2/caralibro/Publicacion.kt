@@ -18,6 +18,8 @@ abstract class Publicacion {
   fun cantidadDeLikes(): Int {
     return listaLikes.size
   }
+
+  //abstract fun mostrarLikes(): Any
 }
 
 class Foto(val alto: Int, val ancho: Int) : Publicacion() {

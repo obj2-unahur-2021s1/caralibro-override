@@ -9,7 +9,6 @@ class UsuarioTest : DescribeSpec({
     val fotoEnCuzco = Foto(768, 1024)
     val unVideo = Video(120)
 
-
     describe("Una publicación") {
       describe("de tipo foto") {
         it("ocupa ancho * alto * compresion bytes") {
@@ -57,12 +56,22 @@ class UsuarioTest : DescribeSpec({
           unVideo.cantidadDeLikes().shouldBe(1)
         }
 
-        //it("personas que dieron Like a una publicacion") {
-          //saludoCumpleanios.mostrarLikes().shuldBe()
-          //fotoEnCuzco.mostrarLikes().shouldBe()
-          //unVideo.MostrarLikes().shouldBe()
-        //}
+        /*it("personas que dieron Like a una publicacion") {
+          val Pepe = Usuario()
+          val Ramon = Usuario()
+
+          saludoCumpleanios.agregarLikeDe(Pepe)
+          saludoCumpleanios.agregarLikeDe(Ramon)
+          saludoCumpleanios.mostrarLikes().shuldBe()
+
+          fotoEnCuzco.agregarLikeDe(Pepe)
+          fotoEnCuzco.mostrarLikes().shouldBe()
+
+          unVideo.agregarLikeDe(Ramon)
+          unVideo.mostrarLikes().shouldBe()
+        }*/
       }
+      //describe("privacidad de una publicacion"){ }
     }
 
     describe("Un usuario") {
@@ -70,9 +79,22 @@ class UsuarioTest : DescribeSpec({
         val Pepe = Usuario()
         val Ramon = Usuario()
         val juana = Usuario()
+
         juana.agregarPublicacion(fotoEnCuzco)
         juana.agregarPublicacion(saludoCumpleanios)
         juana.espacioDePublicaciones().shouldBe(550548)
+        juana.agregarPublicacion(unVideo)
+      }
+
+      describe("usuario mas amistoso") {
+        it("el usuario con mayor cantidad de amigos es el mas amistoso"){
+          val Ramon = Usuario()
+          val juana = Usuario()
+
+          juana.agregarAmigo(Ramon)
+          juana.esMasAmistosoque(Ramon).shouldBe(true)
+        }
+
       }
     }
   }
