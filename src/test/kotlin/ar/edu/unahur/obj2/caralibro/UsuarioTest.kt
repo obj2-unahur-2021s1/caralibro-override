@@ -32,10 +32,23 @@ class UsuarioTest : DescribeSpec({
           unVideo.espacioQueOcupa().shouldBe(120)
         }
       }
+      describe("me gustas de una publicacion"){
+        it("agregar likes a la publicacion"){
+          val Pepe = Usuario()
+          val Ramon = Usuario()
+
+          saludoCumpleanios.agregarLikeDe(Pepe)
+          saludoCumpleanios.agregarLikeDe(Ramon)
+          fotoEnCuzco.agregarLikeDe(Pepe)
+          unVideo.agregarLikeDe(Ramon)
+        }
+      }
     }
 
     describe("Un usuario") {
       it("puede calcular el espacio que ocupan sus publicaciones") {
+        val Pepe = Usuario()
+        val Ramon = Usuario()
         val juana = Usuario()
         juana.agregarPublicacion(fotoEnCuzco)
         juana.agregarPublicacion(saludoCumpleanios)

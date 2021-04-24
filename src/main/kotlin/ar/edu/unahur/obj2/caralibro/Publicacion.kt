@@ -3,7 +3,17 @@ package ar.edu.unahur.obj2.caralibro
 import kotlin.math.ceil
 
 abstract class Publicacion {
+  val listaLikes = mutableListOf<Usuario>()
+
   abstract fun espacioQueOcupa(): Int
+
+  fun agregarLikeDe(unUsuario: Usuario){
+    if (!listaLikes.contains(unUsuario)) {
+      listaLikes.add(unUsuario)
+    } else {
+      error("Este usuario ya dio Like")
+    }
+  }
 }
 
 class Foto(val alto: Int, val ancho: Int) : Publicacion() {
