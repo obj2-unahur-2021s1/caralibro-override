@@ -71,7 +71,38 @@ class UsuarioTest : DescribeSpec({
           unVideo.mostrarLikes().shouldBe()
         }*/
       }
-      //describe("privacidad de una publicacion"){ }
+      describe("privacidad de una publicacion"){
+        it("si un usuario puede ver una publicacion"){
+          /*
+          público: cualquier usuario puede ver la publicación,
+          sólo amigos: sólo los amigos pueden verla,
+          privado con lista de permitidos: el usuario configura una lista que vale para
+          esa publicación, y solo los usuarios que pertenezcan a esa lista pueden verla,
+          público con lista de excluidos: similar al anterior, pero en este caso todos pueden
+          ver la publicación excepto quienes están en la lista.
+          */
+
+          val Pepe = Usuario()
+          val Ramon = Usuario()
+          val Carlos = Usuario()
+
+          Ramon.agregarAmigo(Pepe)
+          unVideo.loPuedeVer(Ramon, Pepe).shouldBe(true)
+          unVideo.loPuedeVer(Ramon, Carlos).shouldBe(true)
+          unVideo.cambiarPrivacidad("soloAmigos")
+          unVideo.loPuedeVer(Ramon, Pepe).shouldBe(true)
+          unVideo.loPuedeVer(Ramon, Carlos).shouldBe(false)
+          fotoEnCuzco.cambiarPrivacidad("privadoConPermitidos")
+          fotoEnCuzco.agregarAPermitidos(Carlos)
+          fotoEnCuzco.loPuedeVer(Ramon, Carlos).shouldBe(true)
+          fotoEnCuzco.loPuedeVer(Ramon, Pepe).shouldBe(false)
+          saludoCumpleanios.cambiarPrivacidad("publicoConExcluidos")
+          saludoCumpleanios.agregarAExcluidos(Carlos)
+          saludoCumpleanios.loPuedeVer(Ramon, Carlos).shouldBe(false)
+          saludoCumpleanios.loPuedeVer(Ramon, Pepe).shouldBe(true)
+
+        }
+      }
     }
 
     describe("Un usuario") {
@@ -93,6 +124,7 @@ class UsuarioTest : DescribeSpec({
 
           juana.agregarAmigo(Ramon)
           juana.esMasAmistosoque(Ramon).shouldBe(true)
+          Ramon.esMasAmistosoque(juana).shouldBe(false)
         }
 
       }
