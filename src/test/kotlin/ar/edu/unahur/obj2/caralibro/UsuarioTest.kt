@@ -1,6 +1,7 @@
 package ar.edu.unahur.obj2.caralibro
 
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 
 class UsuarioTest : DescribeSpec({
@@ -126,7 +127,36 @@ class UsuarioTest : DescribeSpec({
           juana.esMasAmistosoque(Ramon).shouldBe(true)
           Ramon.esMasAmistosoque(juana).shouldBe(false)
         }
+      }
 
+      describe("mejores amigos de un usuario") {
+        it("El conjunto de amigos que pueden ver todas sus publicaciones"){
+          val Pepe = Usuario()
+          val Ramon = Usuario()
+          val juana = Usuario()
+          val Carlos = Usuario()
+
+          juana.agregarPublicacion(fotoEnCuzco)
+          juana.agregarPublicacion(saludoCumpleanios)
+          juana.agregarPublicacion(unVideo)
+
+          juana.agregarAmigo(Ramon)
+          juana.agregarAmigo(Pepe)
+          juana.agregarAmigo(Carlos)
+
+          fotoEnCuzco.cambiarPrivacidad("privadoConPermitidos")
+          fotoEnCuzco.agregarAPermitidos(Carlos)
+          fotoEnCuzco.agregarAPermitidos(Ramon)
+          fotoEnCuzco.agregarAPermitidos(Pepe)
+
+          saludoCumpleanios.cambiarPrivacidad("publicoConExcluidos")
+          saludoCumpleanios.agregarAExcluidos(Carlos)
+
+
+          juana.mejoresAmigos().shouldContain(Pepe)
+          juana.mejoresAmigos().shouldContain(Ramon)
+
+        }
       }
     }
   }
