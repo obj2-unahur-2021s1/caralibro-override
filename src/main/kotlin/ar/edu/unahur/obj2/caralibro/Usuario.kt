@@ -33,4 +33,26 @@ class Usuario {
 
     return buenosAmigos
   }
+
+  fun cantidadLikesTotales():Int {
+    var totalDeLikes = 0
+    for (publicacion in publicaciones){
+      totalDeLikes = totalDeLikes + publicacion.cantidadDeLikes()
+    }
+    return totalDeLikes
+  }
+
+
+  fun amigoMasPopular(): Usuario {
+    var numeroLikes = 0
+    var usuarioAlterno = Usuario()
+
+    for (usuario in amigos){
+      if(numeroLikes < usuario.cantidadLikesTotales()){
+        numeroLikes = usuario.cantidadLikesTotales()
+        usuarioAlterno = usuario
+      }
+    }
+    return usuarioAlterno
+  }
 }

@@ -158,6 +158,43 @@ class UsuarioTest : DescribeSpec({
 
         }
       }
+
+      describe("Amigo mas popular"){
+        it("el amigo con mas likes entre todas sus publicaciones"){
+          val Ramon = Usuario()
+          val juana = Usuario()
+          val Carlos = Usuario()
+
+          val comentario = Texto("Un comentario cortito")
+          val fotoOvelisco = Foto(768, 1024)
+          val videoDeMono = Video(120)
+
+
+          juana.agregarPublicacion(fotoEnCuzco)
+          juana.agregarPublicacion(saludoCumpleanios)
+          juana.agregarPublicacion(unVideo)
+
+          Carlos.agregarPublicacion(comentario)
+          Carlos.agregarPublicacion(fotoOvelisco)
+          Carlos.agregarPublicacion(videoDeMono)
+
+          comentario.agregarLikeDe(Ramon)
+          comentario.agregarLikeDe(juana)
+          fotoOvelisco.agregarLikeDe(Ramon)
+          fotoOvelisco.agregarLikeDe(juana)
+          videoDeMono.agregarLikeDe(juana)
+          videoDeMono.agregarLikeDe(Ramon)
+
+          Ramon.agregarAmigo(juana)
+          Ramon.agregarAmigo(Carlos)
+
+          Carlos.cantidadLikesTotales().shouldBe(6)
+          juana.cantidadLikesTotales().shouldBe(0)
+
+          Ramon.amigoMasPopular().shouldBe(Carlos)
+        }
+      }
+
     }
   }
 })
