@@ -195,6 +195,39 @@ class UsuarioTest : DescribeSpec({
         }
       }
 
+      describe("Stalker"){
+        it("saber si un usuario stalkea al usuario actual")
+
+        val comentario = Texto("Un comentario cortito")
+        val fotoOvelisco = Foto(768, 1024)
+        val videoDeMono = Video(120)
+
+        val Ramon = Usuario()
+        val juana = Usuario()
+        val Carlos = Usuario()
+
+        juana.agregarAmigo(Ramon)
+        juana.agregarAmigo(Carlos)
+
+        juana.agregarPublicacion(fotoEnCuzco)
+        juana.agregarPublicacion(saludoCumpleanios)
+        juana.agregarPublicacion(unVideo)
+        juana.agregarPublicacion(comentario)
+        juana.agregarPublicacion(fotoOvelisco)
+        juana.agregarPublicacion(videoDeMono)
+
+        comentario.agregarLikeDe(Ramon)
+        saludoCumpleanios.agregarLikeDe(Ramon)
+        fotoOvelisco.agregarLikeDe(Ramon)
+        fotoEnCuzco.agregarLikeDe(Ramon)
+        unVideo.agregarLikeDe(Ramon)
+        videoDeMono.agregarLikeDe(Ramon)
+
+        juana.cuantosLikesDio(Ramon).shouldBe(6)
+
+        juana.quienMeStalkea().shouldBe(Ramon)
+      }
+
     }
   }
 })

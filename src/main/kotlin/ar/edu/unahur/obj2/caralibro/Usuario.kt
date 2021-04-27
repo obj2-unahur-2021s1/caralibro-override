@@ -55,4 +55,28 @@ class Usuario {
     }
     return usuarioAlterno
   }
+
+  fun cuantosLikesDio(unUsuario: Usuario): Int{
+    var cantidadLikes = 0
+    for (publicacion in publicaciones){
+      if(publicacion.listaLikes.contains(unUsuario)){
+        cantidadLikes = cantidadLikes + 1
+      }
+    }
+  return cantidadLikes
+  }
+
+
+  fun quienMeStalkea(): Usuario {
+    var likesPorUsuario = 0
+    var stalker = Usuario()
+
+    for (unAmigo in amigos){
+      if(likesPorUsuario < this.cuantosLikesDio(unAmigo)){
+        likesPorUsuario = this.cuantosLikesDio(unAmigo)
+        stalker = unAmigo
+      }
+    }
+    return stalker
+  }
 }
